@@ -1,4 +1,4 @@
-//0.0.3
+//0.0.4
 
 //import js method
 load("script/ScriptData.js");
@@ -39,6 +39,9 @@ function update(type, data){
             parseNext(json);
             break;
         }
+        default:{
+            break;
+        }
     }
 }
 
@@ -56,7 +59,7 @@ function parseNext(json){
 }
 
 function hasDestructionBattle(json){
-    return json.api_data.api_destruction_battle !== undefined;
+    return json.api_data.api_destruction_battle != null;
 }
 
 function DestructionBattleDto(json){
