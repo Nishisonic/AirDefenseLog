@@ -1,4 +1,4 @@
-//0.0.5
+//0.0.6
 
 //import js method
 load("script/ScriptData.js");
@@ -26,7 +26,6 @@ GlobalContext      = Java.type("logbook.data.context.GlobalContext");
 
 var PATH = Paths.get("基地航空隊(防空).csv");
 var PATH2 = Paths.get("基地航空隊(防空)_alternative.csv");
-var HEADER = "日付,海域,マス,自陣形,敵陣形,会敵,被害,自機数,自機喪失数,敵機数,敵機喪失数,制空権,自触接,敵触接,基地1.中隊1.名前,基地1.中隊1.改修,基地1.中隊1.熟練度,基地1.中隊1.機数,基地1.中隊2.名前,基地1.中隊2.改修,基地1.中隊2.熟練度,基地1.中隊2.機数,基地1.中隊3.名前,基地1.中隊3.改修,基地1.中隊3.熟練度,基地1.中隊3.機数,基地1.中隊4.名前,基地1.中隊4.改修,基地1.中隊4.熟練度,基地1.中隊4.機数,基地2.中隊1.名前,基地2.中隊1.改修,基地2.中隊1.熟練度,基地2.中隊1.機数,基地2.中隊2.名前,基地2.中隊2.改修,基地2.中隊2.熟練度,基地2.中隊2.機数,基地2.中隊3.名前,基地2.中隊3.改修,基地2.中隊3.熟練度,基地2.中隊3.機数,基地2.中隊4.名前,基地2.中隊4.改修,基地2.中隊4.熟練度,基地2.中隊4.機数,基地3.中隊1.名前,基地3.中隊1.改修,基地3.中隊1.熟練度,基地3.中隊1.機数,基地3.中隊2.名前,基地3.中隊2.改修,基地3.中隊2.熟練度,基地3.中隊2.機数,基地3.中隊3.名前,基地3.中隊3.改修,基地3.中隊3.熟練度,基地3.中隊3.機数,基地3.中隊4.名前,基地3.中隊4.改修,基地3.中隊4.熟練度,基地3.中隊4.機数,敵艦1.ID,敵艦1.名前,敵艦1.Lv,敵艦1.HP,敵艦1.装備1.名前,敵艦1.装備2.名前,敵艦1.装備3.名前,敵艦1.装備4.名前,敵艦1.装備5.名前,敵艦2.ID,敵艦2.名前,敵艦2.Lv,敵艦2.HP,敵艦2.装備1.名前,敵艦2.装備2.名前,敵艦2.装備3.名前,敵艦2.装備4.名前,敵艦2.装備5.名前,敵艦3.ID,敵艦3.名前,敵艦3.Lv,敵艦3.HP,敵艦3.装備1.名前,敵艦3.装備2.名前,敵艦3.装備3.名前,敵艦3.装備4.名前,敵艦3.装備5.名前,敵艦4.ID,敵艦4.名前,敵艦4.Lv,敵艦4.HP,敵艦4.装備1.名前,敵艦4.装備2.名前,敵艦4.装備3.名前,敵艦4.装備4.名前,敵艦4.装備5.名前,敵艦5.ID,敵艦5.名前,敵艦5.Lv,敵艦5.HP,敵艦5.装備1.名前,敵艦5.装備2.名前,敵艦5.装備3.名前,敵艦5.装備4.名前,敵艦5.装備5.名前,敵艦6.ID,敵艦6.名前,敵艦6.Lv,敵艦6.HP,敵艦6.装備1.名前,敵艦6.装備2.名前,敵艦6.装備3.名前,敵艦6.装備4.名前,敵艦6.装備5.名前,基地1.被雷flag,基地2.被雷flag,基地3.被雷flag,基地4.被雷flag,基地5.被雷flag,基地6.被雷flag,敵艦1.被雷flag,敵艦2.被雷flag,敵艦3.被雷flag,敵艦4.被雷flag,敵艦5.被雷flag,敵艦6.被雷flag,基地1.被爆flag,基地2.被爆flag,基地3.被爆flag,基地4.被爆flag,基地5.被爆flag,基地6.被爆flag,敵艦1.被爆flag,敵艦2.被爆flag,敵艦3.被爆flag,敵艦4.被爆flag,敵艦5.被爆flag,敵艦6.被爆flag,基地1.被CLflag,基地2.被CLflag,基地3.被CLflag,基地4.被CLflag,基地5.被CLflag,基地6.被CLflag,敵艦1.被CLflag,敵艦2.被CLflag,敵艦3.被CLflag,敵艦4.被CLflag,敵艦5.被CLflag,敵艦6.被CLflag,基地1.被ダメ,基地2.被ダメ,基地3.被ダメ,基地4.被ダメ,基地5.被ダメ,基地6.被ダメ,敵艦1.被ダメ,敵艦2.被ダメ,敵艦3.被ダメ,敵艦4.被ダメ,敵艦5.被ダメ,敵艦6.被ダメ";
 
 function update(type, data){
     var json = data.getJsonObject();
@@ -79,6 +78,8 @@ function DestructionBattleDto(json){
     this.lostKind         = data.api_lost_kind.intValue(); //使わない
     this.lostKindString   = toLostKindShortString(data.api_lost_kind.intValue());
     this.airBaseAttack    = new AirBaseAttack(data.api_air_base_attack);
+    this.nowhps           = parseIntArray(data.api_nowhps);
+    this.maxhps           = parseIntArray(data.api_maxhps);
 }
 
 function AirBaseAttack(data){
@@ -123,18 +124,19 @@ function format(dto){
     result.push(dto.matchString);
     result.push(dto.lostKindString);
     Array.prototype.push.apply(result,stage1Format(dto.airBaseAttack.stage1));
-    Array.prototype.push.apply(result,squadronFormat(dto.airBaseAttack.squadronPlane,dto.mapAreaId));
+    Array.prototype.push.apply(result,squadronFormat(dto.airBaseAttack.squadronPlane,dto.mapAreaId,dto.nowhps,dto.maxhps));
     Array.prototype.push.apply(result,enemyFormat(dto.enemys));
     Array.prototype.push.apply(result,stage3Format(dto.airBaseAttack.stage3));
     return result.join(",");
 }
 
-function squadronFormat(squadronPlane,areaId){
+function squadronFormat(squadronPlane,areaId,nowhps,maxhps){
     var result = [];
     var airbase = getData("AirBase");
-    for(var i = 1;i <= 3;i++){ 
+    for(var i = 1;i <= 3;i++){
+        result.push(nowhps[i] + "/" + maxhps[i]);
         if(squadronPlane.size() <= i){
-            for(var j = 0;j < 15;j++){
+            for(var j = 0;j < 20;j++){
                 result.push("");
             }
         } else {
@@ -142,6 +144,7 @@ function squadronFormat(squadronPlane,areaId){
             for(var j = 0;j < 4;j++){
                 if(squadron.size() <= j || squadron[j].api_mst_id === undefined){
                     //result.push("");
+                    result.push("");
                     result.push("");
                     result.push("");
                     result.push("");
@@ -154,18 +157,22 @@ function squadronFormat(squadronPlane,areaId){
                         var uniqueIdAtSortie = squadronAtSortie.api_slotid.intValue();
                         var slotid           = squadron[j].api_mst_id.intValue();
                         var item             = GlobalContext.getItem(uniqueIdAtSortie);
+                        var cond             = squadronAtSortie.api_cond.intValue();
                         if(slotid != 0){
                             if(item.slotitemId == slotid){
                                 result.push(item.getLevel());
                                 result.push(item.getAlv());
+                                result.push(toCondString(cond));
                             } else {
                                 throw new Error("No Match");
                             }
                         } else {
                             result.push("");
                             result.push("");
+                            result.push("");
                         }
                     } catch(e) {
+                        result.push("不明");
                         result.push("不明");
                         result.push("不明");
                     }
@@ -245,7 +252,7 @@ function write(s,p){
         var path = p === undefined ? PATH : p;
         if(Files.notExists(path)){
             pw = new PrintWriter(Files.newBufferedWriter(path,Charset.defaultCharset()));
-            pw.println(HEADER);
+            pw.println(getHeader());
         } else {
             pw = new PrintWriter(Files.newBufferedWriter(path,Charset.defaultCharset(),StandardOpenOption.WRITE,StandardOpenOption.APPEND));
         }
@@ -381,4 +388,60 @@ function getNextKind(eventId,eventKind){
         case 9:return "揚陸地点";
         default:return null;
     }
+}
+
+function toCondString(cond){
+    switch(cond){
+        case 1:return "通常";
+        case 2:return "橙疲労";
+        case 3:return "赤疲労";
+        default:return null;
+    }
+}
+
+function getHeader(){
+    var result = [];
+    result.push("日付");
+    result.push("海域");
+    result.push("マス");
+    result.push("自陣形");
+    result.push("敵陣形");
+    result.push("会敵");
+    result.push("被害");
+    result.push("自機数");
+    result.push("自機喪失数");
+    result.push("敵機数");
+    result.push("敵機喪失数");
+    result.push("制空権");
+    result.push("自触接");
+    result.push("敵触接");
+    for(var i = 1;i <= 3;i++){
+        result.push("基地" + i + ".HP");
+        for(var j = 1;j <= 4;j++){
+            result.push("基地" + i + ".中隊.名前");
+            result.push("基地" + i + ".中隊.改修");
+            result.push("基地" + i + ".中隊.熟練度");
+            result.push("基地" + i + ".中隊.疲労");
+            result.push("基地" + i + ".中隊.機数");
+        }
+    }
+    for(var i = 1;i <= 6;i++){
+        result.push("敵艦" + i + ".ID");
+        result.push("敵艦" + i + ".名前");
+        result.push("敵艦" + i + ".Lv");
+        result.push("敵艦" + i + ".HP");
+        for(var j = 1;j <= 5;j++){
+            result.push("敵艦" + i + ".装備" + j + ".名前");
+        }
+    }
+    var prefix = ["基地","敵艦"];
+    var suffix = ["被雷flag","被爆flag","被CLflag","被ダメ"];
+    for(var i = 0;i < prefix.length;i++){
+        for(var j = 0;j < suffix.length;j++){
+            for(var k = 1;k <= 6;k++){
+                result.push(prefix[i] + k + "." + suffix[j]);
+            }
+        }
+    }
+    return result.join(",");
 }
