@@ -1,4 +1,4 @@
-//0.0.6
+//0.0.7
 
 //import js method
 load("script/ScriptData.js");
@@ -436,10 +436,10 @@ function getHeader(){
     }
     var prefix = ["基地","敵艦"];
     var suffix = ["被雷flag","被爆flag","被CLflag","被ダメ"];
-    for(var i = 0;i < prefix.length;i++){
-        for(var j = 0;j < suffix.length;j++){
+    for(var i = 0;i < suffix.length;i++){
+        for(var j = 0;j < prefix.length;j++){
             for(var k = 1;k <= 6;k++){
-                result.push(prefix[i] + k + "." + suffix[j]);
+                result.push(prefix[j] + k + "." + suffix[i]);
             }
         }
     }
