@@ -2,7 +2,7 @@
 基地航空隊(防空)ログ (AirDefenseLog)
 --
 
-[![Release](https://img.shields.io/badge/gem-v0.1.0-brightgreen.svg)](https://github.com/Nishisonic/AirDefenseLog/releases/latest)
+[![Release](https://img.shields.io/badge/gem-v0.1.1-brightgreen.svg)](https://github.com/Nishisonic/AirDefenseLog/releases/latest)
 [![License](https://img.shields.io/npm/l/express.svg)](https://docs.google.com/spreadsheets/d/1gSYgCPTMV7_bDerWTs_KCgVnhdaJQnFVFXcw5cFCqos/edit#gid=761755938)
 
 

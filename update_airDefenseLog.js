@@ -1,4 +1,4 @@
-//0.1.0
+//0.1.1
 
 //import js method
 load("script/ScriptData.js");
@@ -139,14 +139,14 @@ function squadronFormat(squadronPlane, areaId, nowhps, maxhps) {
     var airbase = getData("AirBase");
     for (var i = 0; i < MAX_AIRBASE_NUM; i++) {
         result.push(nowhps[i] + "/" + maxhps[i]);
-        if (squadronPlane == "null" || squadronPlane.size() < i + 1) {
+        if (squadronPlane == "null" || squadronPlane[String(i + 1)] == null) {
             for (var j = 0; j < MAX_ITEM_NUM * PARAM_NUM; j++) {
                 result.push("");
             }
         } else {
             var squadron = squadronPlane[String(i + 1)]; // "1" or "2" or "3"
             for (var j = 0; j < PARAM_NUM; j++) {
-                if (squadron.size() <= j || squadron[j].api_mst_id === undefined) {
+                if (squadron.length <= j || squadron[j].api_mst_id === undefined) {
                     Array.prototype.push.apply(result, ["", "", "", "", ""]);
                 } else {
                     result.push(Item.get(squadron[j].api_mst_id.intValue()).getName());
