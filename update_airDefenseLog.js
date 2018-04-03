@@ -1,4 +1,4 @@
-//0.1.1
+//0.1.2
 
 //import js method
 load("script/ScriptData.js");
@@ -151,7 +151,7 @@ function squadronFormat(squadronPlane, areaId, nowhps, maxhps) {
                 } else {
                     result.push(Item.get(squadron[j].api_mst_id.intValue()).getName());
                     try { //艦載機にズレがないかを調べる(装備IDしかわからないが一応)
-                        var squadronAtSortie = airbase.get(areaId)[i - 1].api_plane_info[j];
+                        var squadronAtSortie = airbase.get(areaId)[i].api_plane_info[j];
                         var uniqueIdAtSortie = squadronAtSortie.api_slotid.intValue();
                         var slotid = squadron[j].api_mst_id.intValue();
                         var item = GlobalContext.getItem(uniqueIdAtSortie);
