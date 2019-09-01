@@ -1,4 +1,4 @@
-//0.1.3
+//0.1.4
 
 //import js method
 load("script/ScriptData.js");
@@ -181,8 +181,8 @@ function squadronFormat(squadronPlane, areaId, nowhps, maxhps) {
 function enemyFormat(enemys) {
     var result = [];
     for (var i = 0; i < MAX_ENEMY_SHIP_NUM; i++) {
-        var enemy = enemys.get(i);
-        if (enemys) {
+        if (enemys.size() > i) {
+            var enemy = enemys.get(i);
             result.push(enemy.id);
             result.push(enemy.name);
             result.push(enemy.lv);
