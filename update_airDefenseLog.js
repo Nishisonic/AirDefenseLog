@@ -1,4 +1,4 @@
-//0.1.2
+//0.1.3
 
 //import js method
 load("script/ScriptData.js");
@@ -182,17 +182,21 @@ function enemyFormat(enemys) {
     var result = [];
     for (var i = 0; i < MAX_ENEMY_SHIP_NUM; i++) {
         var enemy = enemys.get(i);
-        result.push(enemy.id);
-        result.push(enemy.name);
-        result.push(enemy.lv);
-        result.push(enemy.nowhp + "/" + enemy.maxhp);
-        for (var j = 0; j < MAX_ITEM_NUM; j++) {
-            var slotid = enemy.slots[j];
-            if (slotid == -1) {
-                result.push("");
-            } else {
-                result.push(Item.get(slotid).getName());
+        if (enemys) {
+            result.push(enemy.id);
+            result.push(enemy.name);
+            result.push(enemy.lv);
+            result.push(enemy.nowhp + "/" + enemy.maxhp);
+            for (var j = 0; j < MAX_ITEM_NUM; j++) {
+                var slotid = enemy.slots[j];
+                if (slotid == -1) {
+                    result.push("");
+                } else {
+                    result.push(Item.get(slotid).getName());
+                }
             }
+        } else {
+            result = result.concat(Array.apply(null, new Array(4 + MAX_ITEM_NUM)).map(String.prototype.valueOf,""));
         }
     }
     return result;
@@ -288,7 +292,7 @@ function toMatch(id) {
 
 function getEnemyDataList(data) {
     var enemys = new ArrayList();
-    for (var i = 0; i < MAX_ENEMY_SHIP_NUM; i++) {
+    for (var i = 0; i < data.api_ship_ke.length; i++) {
         var id = data.api_ship_ke[i].intValue();
         var name = Ship.get(data.api_ship_ke[i].intValue()).getFullName();
         var lv = data.api_ship_lv[i].intValue();
