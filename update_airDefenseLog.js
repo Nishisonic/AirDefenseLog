@@ -1,4 +1,4 @@
-//0.1.4
+//0.1.5
 
 //import js method
 load("script/ScriptData.js");
@@ -83,8 +83,8 @@ function DestructionBattleDto(json) {
     this.lostKind = data.api_lost_kind.intValue(); //使わない
     this.lostKindString = toLostKindShortString(data.api_lost_kind.intValue());
     this.airBaseAttack = new AirBaseAttack(data.api_air_base_attack);
-    this.nowhps = parseIntArray(data.api_e_nowhps);
-    this.maxhps = parseIntArray(data.api_e_maxhps);
+    this.nowhps = parseIntArray(data.api_f_nowhps);
+    this.maxhps = parseIntArray(data.api_f_maxhps);
 }
 
 function AirBaseAttack(data) {
